@@ -30,6 +30,7 @@ public class SheepSimulationConfig implements GenericSimulationConfig {
         this.wolfShape = wolfShape;
     }
 
+    @Override
     public Collection<Agent> getAgents() {
         return Arrays.asList(
                 new SheepAgent(
@@ -55,14 +56,16 @@ public class SheepSimulationConfig implements GenericSimulationConfig {
                                 (Modifier) ModRepresentation.apply(sheepShape, Colour.GREEN)
                         ).iterator()).asScala().toSeq(),
                         new ModifierBuffer()
-                ), new SheepAgent(
+                ),
+                new SheepAgent(
                         JavaConverters.asScalaIteratorConverter(Arrays.asList(
                                 ModPosition.apply(Vector.of(600, 300)),
                                 ModVelocity.apply(Vector.of(8, 14), "standard"),
                                 (Modifier) ModRepresentation.apply(sheepShape, Colour.GREEN)
                         ).iterator()).asScala().toSeq(),
                         new ModifierBuffer()
-                ), new SheepAgent(
+                ),
+                new SheepAgent(
                         JavaConverters.asScalaIteratorConverter(Arrays.asList(
                                 ModPosition.apply(Vector.of(200, 600)),
                                 ModVelocity.apply(Vector.of(-4, 14), "standard"),
@@ -105,6 +108,7 @@ public class SheepSimulationConfig implements GenericSimulationConfig {
         );
     }
 
+    @Override
     public List<? extends Area> getAreas(Step step) {
         return Collections.singletonList(
                 new GenericArea(
