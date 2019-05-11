@@ -10,4 +10,7 @@ public class GenericSimulationMap extends SimulationMap {
         super(areas);
     }
 
+    public GenericSimulationMap(GenericSimulationBuilder builder) {
+        super(builder.build());
+    }
 }

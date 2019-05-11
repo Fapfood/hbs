@@ -26,8 +26,6 @@
         <constructor-arg name="factor" value="5"/>
     </bean>
 
-    <bean name="modifierBuffer" class="pl.edu.agh.hbs.model.ModifierBuffer"/>
-
     <bean id="webClientConfigProvider" class="pl.edu.agh.hbs.simulation.WebClientConfigProviderImpl">
         <constructor-arg name="width" value="2000"/>
         <constructor-arg name="height" value="1500"/>
@@ -39,10 +37,17 @@
         </constructor-arg>
     </bean>
 
-    <bean id="simulationMap" class="pl.edu.agh.hbs.simulation.config.SheepSimulationConfig">
-        <constructor-arg name="step" ref="genericStep"/>
-        <constructor-arg name="sheep" ref="sheep"/>
-        <constructor-arg name="wolf" ref="wolf"/>
-        <constructor-arg name="modifierBuffer" ref="modifierBuffer"/>
+    <bean id="simulationMap" class="pl.edu.agh.hbs.simulation.generic.GenericSimulationMap">
+        <constructor-arg name="builder">
+            <bean class="pl.edu.agh.hbs.simulation.generic.GenericSimulationBuilder">
+                <constructor-arg name="step" ref="genericStep"/>
+                <constructor-arg name="config">
+                    <bean class="pl.edu.agh.hbs.simulation.config.SheepSimulationConfig">
+                        <constructor-arg name="sheepShape" ref="sheep"/>
+                        <constructor-arg name="wolfShape" ref="wolf"/>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
     </bean>
 </beans>
