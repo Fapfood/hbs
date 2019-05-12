@@ -39,7 +39,7 @@
             <bean class="pl.edu.agh.hbs.simulation.generic.GenericSimulationBuilder">
                 <constructor-arg name="step" ref="genericStep"/>
                 <constructor-arg name="config">
-                    <bean class="pl.edu.agh.hbs.simulation.config.BirdSimulationConfig">
+                    <bean class="pl.edu.agh.hbs.simulation.config.BirdRandomSimulationConfig">
                         <constructor-arg name="birdShape" ref="bird"/>
                     </bean>
                 </constructor-arg>

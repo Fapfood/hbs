@@ -42,7 +42,7 @@
             <bean class="pl.edu.agh.hbs.simulation.generic.GenericSimulationBuilder">
                 <constructor-arg name="step" ref="genericStep"/>
                 <constructor-arg name="config">
-                    <bean class="pl.edu.agh.hbs.simulation.config.SheepSimulationConfig">
+                    <bean class="pl.edu.agh.hbs.simulation.config.SheepRandomSimulationConfig">
                         <constructor-arg name="sheepShape" ref="sheep"/>
                         <constructor-arg name="wolfShape" ref="wolf"/>
                     </bean>
