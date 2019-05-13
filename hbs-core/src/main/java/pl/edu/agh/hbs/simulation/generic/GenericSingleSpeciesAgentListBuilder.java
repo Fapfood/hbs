@@ -2,23 +2,24 @@ package pl.edu.agh.hbs.simulation.generic;
 
 import pl.edu.agh.hbs.model.Agent;
 import pl.edu.agh.hbs.model.ModifierBuffer;
-import pl.edu.agh.hbs.model.SpeciesObject;
 import pl.edu.agh.hbs.model.Vector;
 import pl.edu.agh.hbs.model.skill.Modifier;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModPosition;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
 import pl.edu.agh.hbs.model.skill.common.modifier.ModVelocity;
 import scala.collection.JavaConverters;
+import scala.collection.Seq;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class GenericSingleSpeciesAgentListBuilder implements GenericAgentListBuilder {
 
-    private GenericAgentBuilder agentBuilder;
+    private BiFunction<Seq<Modifier>, ModifierBuffer, Agent> agentBuilder;
     private Vector positionMin = Vector.of(0, 0);
     private Vector positionMax = Vector.of(2500, 1500);
     private Vector speedMin = Vector.of(-20, -20);
@@ -34,7 +35,7 @@ public class GenericSingleSpeciesAgentListBuilder implements GenericAgentListBui
     }
 
     private Agent getInstance() {
-        return agentBuilder.newAgent(
+        return agentBuilder.apply(
                 JavaConverters.asScalaIteratorConverter(Arrays.asList(
                         ModPosition.apply(vectorFromRange(positionMin, positionMax)),
                         ModVelocity.apply(vectorFromRange(speedMin, speedMax), velocityLabel),
@@ -55,7 +56,7 @@ public class GenericSingleSpeciesAgentListBuilder implements GenericAgentListBui
         return ThreadLocalRandom.current().nextDouble(begin, end);
     }
 
-    public GenericSingleSpeciesAgentListBuilder setAgentBuilder(GenericAgentBuilder agentBuilder) {
+    public GenericSingleSpeciesAgentListBuilder setAgentBuilder(BiFunction<Seq<Modifier>, ModifierBuffer, Agent> agentBuilder) {
         this.agentBuilder = agentBuilder;
         return this;
     }
