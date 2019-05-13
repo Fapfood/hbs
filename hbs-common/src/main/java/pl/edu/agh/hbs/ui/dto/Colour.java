@@ -8,7 +8,8 @@ public enum Colour {
     GREY("grey"),
     RED("red"),
     YELLOW("yellow"),
-    WHITE("white");
+    WHITE("white"),
+    BLACK("black");
 
     Colour(String value) {
         this.value = value;
