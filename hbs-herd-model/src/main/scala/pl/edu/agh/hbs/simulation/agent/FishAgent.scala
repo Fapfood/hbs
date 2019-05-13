@@ -22,11 +22,6 @@ class FishAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: Mo
     with DyingAgent
     with Prey {
 
-  override def modifiersCopiedFromParent(inherited: ModifierBuffer): Seq[Modifier] = {
-    val modifiers = ListBuffer.empty[Modifier]
-    super.modifiersCopiedFromParent(inherited) ++ modifiers
-  }
-
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
     modifiers += ModFearOf(Shark)

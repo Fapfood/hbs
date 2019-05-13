@@ -1,9 +1,8 @@
 package pl.edu.agh.hbs.model
 
-import pl.edu.agh.hbs.model.skill.{Action, Decision, Message}
+import pl.edu.agh.hbs.model.skill.{Action, Decision}
 
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 
 class CurrentActions extends Serializable {
   private val stepOutput: StepOutput = new StepOutput()

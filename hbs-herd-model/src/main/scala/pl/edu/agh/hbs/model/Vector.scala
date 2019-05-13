@@ -29,7 +29,8 @@ class Vector private(val value: Double*) extends Serializable {
 }
 
 object Vector {
-  @varargs def of(value: Double*): Vector = new Vector(value:_*)
+  @varargs def of(value: Double*): Vector = new Vector(value: _*)
 
   def apply(value: Double*): Vector = new Vector(value: _*)
+
 }

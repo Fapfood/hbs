@@ -13,11 +13,11 @@ abstract class Agent(private val initModifiers: Seq[Modifier], private val inher
   extends Serializable {
 
   val modifiers: ModifierBuffer = new ModifierBuffer()
-  protected val decisions: ListBuffer[Decision] = scala.collection.mutable.ListBuffer.empty[Decision]
-  protected val beforeStepActions: ListBuffer[Action] = scala.collection.mutable.ListBuffer.empty[Action]
-  protected val afterStepActions: ListBuffer[Action] = scala.collection.mutable.ListBuffer.empty[Action]
+  protected val decisions: ListBuffer[Decision] = ListBuffer.empty[Decision]
+  protected val beforeStepActions: ListBuffer[Action] = ListBuffer.empty[Action]
+  protected val afterStepActions: ListBuffer[Action] = ListBuffer.empty[Action]
 
-  private val currentActions: CurrentActions = new CurrentActions
+  private val currentActions: CurrentActions = new CurrentActions()
   private val stepOutput: StepOutput = new StepOutput()
   modifiers.update(defaultModifiers() ++ modifiersCopiedFromParent(inheritedModifiers) ++ initModifiers)
   afterStepActions += ActIncrementTimers

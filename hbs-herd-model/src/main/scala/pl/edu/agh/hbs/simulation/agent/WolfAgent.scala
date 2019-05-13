@@ -20,11 +20,6 @@ class WolfAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: Mo
     with DyingAgent
     with Predator {
 
-  override def modifiersCopiedFromParent(inherited: ModifierBuffer): Seq[Modifier] = {
-    val modifiers = ListBuffer.empty[Modifier]
-    super.modifiersCopiedFromParent(inherited) ++ modifiers
-  }
-
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
     modifiers += ModHuntFor(Sheep)

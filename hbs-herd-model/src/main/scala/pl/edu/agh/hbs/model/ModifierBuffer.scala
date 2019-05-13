@@ -8,7 +8,7 @@ import scala.reflect.ClassTag
 
 class ModifierBuffer extends Serializable {
 
-  private val modifiers: ListBuffer[Modifier] = scala.collection.mutable.ListBuffer.empty[Modifier]
+  private val modifiers: ListBuffer[Modifier] = ListBuffer.empty[Modifier]
 
   def update(elems: Seq[Modifier]): Unit = elems.foreach(e => update(e))
 
