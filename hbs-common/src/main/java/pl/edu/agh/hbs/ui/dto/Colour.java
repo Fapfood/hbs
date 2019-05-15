@@ -8,6 +8,7 @@ public enum Colour {
     GREY("grey"),
     RED("red"),
     YELLOW("yellow"),
+    PURPLE("purple"),
     WHITE("white"),
     BLACK("black");
 

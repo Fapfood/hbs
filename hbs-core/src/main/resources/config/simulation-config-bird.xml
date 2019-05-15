@@ -25,6 +25,7 @@
     <bean id="webClientConfigProvider" class="pl.edu.agh.hbs.simulation.WebClientConfigProviderImpl">
         <constructor-arg name="width" value="2000"/>
         <constructor-arg name="height" value="1500"/>
+        <constructor-arg name="colour" value="BLACK"/>
         <constructor-arg name="representations">
             <scala-util:seq>
                 <ref bean="bird"/>

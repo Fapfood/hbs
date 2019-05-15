@@ -22,16 +22,16 @@ public class FishRandomSimulationConfig extends GenericSimulationConfigWithBuild
 
     @Override
     public GenericAgentListBuilder getAgentsBuilder() {
-        GenericAgentListBuilder sheepBuilder = new GenericSingleSpeciesAgentListBuilder()
+        GenericAgentListBuilder fishBuilder = new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(6)
                 .setRepresentation(ModRepresentation.apply(fishShape, Colour.GREEN))
                 .setAgentBuilder(Fish::newAgent);
-        GenericAgentListBuilder wolfBuilder = new GenericSingleSpeciesAgentListBuilder()
+        GenericAgentListBuilder sharkBuilder = new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(3)
                 .setRepresentation(ModRepresentation.apply(sharkShape, Colour.RED))
                 .setAgentBuilder(Shark::newAgent);
         return new GenericCombinedAgentListBuilder()
-                .addAgentsBuilder(sheepBuilder)
-                .addAgentsBuilder(wolfBuilder);
+                .addAgentsBuilder(fishBuilder)
+                .addAgentsBuilder(sharkBuilder);
     }
 }

@@ -21,7 +21,7 @@ public class GenericSingleSpeciesAgentListBuilder implements GenericAgentListBui
 
     private BiFunction<Seq<Modifier>, ModifierBuffer, Agent> agentBuilder;
     private Vector positionMin = Vector.of(0, 0);
-    private Vector positionMax = Vector.of(2500, 1500);
+    private Vector positionMax = Vector.of(2000, 1500);
     private Vector speedMin = Vector.of(-20, -20);
     private Vector speedMax = Vector.of(20, 20);
     private String velocityLabel = "standard";

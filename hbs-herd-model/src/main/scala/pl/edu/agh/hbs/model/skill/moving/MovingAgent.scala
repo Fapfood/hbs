@@ -18,7 +18,7 @@ trait MovingAgent extends Agent {
 
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
-    modifiers += ModMoveParameters(0.1, 1000, 50)
+    modifiers += ModMoveParameters(0.1, 500, 50)
     super.defaultModifiers() ++ modifiers
   }
 }
