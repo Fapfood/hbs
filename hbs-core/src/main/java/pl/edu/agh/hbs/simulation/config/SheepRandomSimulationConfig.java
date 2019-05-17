@@ -5,8 +5,8 @@ import pl.edu.agh.hbs.simulation.generic.GenericAgentListBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericCombinedAgentListBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericSimulationConfigWithBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericSingleSpeciesAgentListBuilder;
-import pl.edu.agh.hbs.simulation.species.Sheep;
-import pl.edu.agh.hbs.simulation.species.Wolf;
+import pl.edu.agh.hbs.simulation.species.SheepSpecies;
+import pl.edu.agh.hbs.simulation.species.WolfSpecies;
 import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
 
@@ -25,11 +25,11 @@ public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuil
         GenericAgentListBuilder sheepBuilder = new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(10)
                 .setRepresentation(ModRepresentation.apply(sheepShape, Colour.GREEN))
-                .setAgentBuilder(Sheep::newAgent);
+                .setAgentBuilder(SheepSpecies::newAgent);
         GenericAgentListBuilder wolfBuilder = new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(3)
                 .setRepresentation(ModRepresentation.apply(wolfShape, Colour.RED))
-                .setAgentBuilder(Wolf::newAgent);
+                .setAgentBuilder(WolfSpecies::newAgent);
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(sheepBuilder)
                 .addAgentsBuilder(wolfBuilder);
