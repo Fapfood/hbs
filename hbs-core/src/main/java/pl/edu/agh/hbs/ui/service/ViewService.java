@@ -3,6 +3,7 @@ package pl.edu.agh.hbs.ui.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.hbs.model.Vector;
+import pl.edu.agh.hbs.model.skill.patch.Patch;
 import pl.edu.agh.hbs.state.SimulationStateProvider;
 import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Body;
@@ -31,19 +32,28 @@ public class ViewService {
      * @return frame with all agents state
      */
     public ViewFrame prepareViewFrame() {
+        List<Body> patches = new LinkedList<>();
         List<Body> bodies = new LinkedList<>();
         stateProvider.getAllAgents().forEach(agent -> {
             final Vector position = agent.position();
             final Representation representation = agent.representation();
             final Colour colour = agent.colour();
             final ViewPosition viewPosition = new ViewPosition((int) position.get(0), (int) position.get(1));
-            bodies.add(new Body(
-                    viewPosition,
-                    colour.getValue(),
-                    representation.getIdentity(),
-                    (int) agent.rotation()));
+            if (Patch.class.isAssignableFrom(agent.getClass())) {
+                patches.add(new Body(
+                        viewPosition,
+                        colour.getValue(),
+                        representation.getIdentity(),
+                        (int) agent.rotation()));
+            } else {
+                bodies.add(new Body(
+                        viewPosition,
+                        colour.getValue(),
+                        representation.getIdentity(),
+                        (int) agent.rotation()));
+            }
         });
-
-        return new ViewFrame(bodies);
+        patches.addAll(bodies);
+        return new ViewFrame(patches);
     }
 }
