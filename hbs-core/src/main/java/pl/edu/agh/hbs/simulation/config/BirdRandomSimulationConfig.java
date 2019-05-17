@@ -4,7 +4,7 @@ import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
 import pl.edu.agh.hbs.simulation.generic.GenericAgentListBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericSimulationConfigWithBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericSingleSpeciesAgentListBuilder;
-import pl.edu.agh.hbs.simulation.species.Bird;
+import pl.edu.agh.hbs.simulation.species.BirdSpecies;
 import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
 
@@ -21,6 +21,6 @@ public class BirdRandomSimulationConfig extends GenericSimulationConfigWithBuild
         return new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(17)
                 .setRepresentation(ModRepresentation.apply(birdShape, Colour.ORANGE))
-                .setAgentBuilder(Bird::newAgent);
+                .setAgentBuilder(BirdSpecies::newAgent);
     }
 }

@@ -5,8 +5,8 @@ import pl.edu.agh.hbs.simulation.generic.GenericAgentListBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericCombinedAgentListBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericSimulationConfigWithBuilder;
 import pl.edu.agh.hbs.simulation.generic.GenericSingleSpeciesAgentListBuilder;
-import pl.edu.agh.hbs.simulation.species.Fish;
-import pl.edu.agh.hbs.simulation.species.Shark;
+import pl.edu.agh.hbs.simulation.species.FishSpecies;
+import pl.edu.agh.hbs.simulation.species.SharkSpecies;
 import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
 
@@ -25,11 +25,11 @@ public class FishRandomSimulationConfig extends GenericSimulationConfigWithBuild
         GenericAgentListBuilder fishBuilder = new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(6)
                 .setRepresentation(ModRepresentation.apply(fishShape, Colour.GREEN))
-                .setAgentBuilder(Fish::newAgent);
+                .setAgentBuilder(FishSpecies::newAgent);
         GenericAgentListBuilder sharkBuilder = new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(3)
                 .setRepresentation(ModRepresentation.apply(sharkShape, Colour.RED))
-                .setAgentBuilder(Shark::newAgent);
+                .setAgentBuilder(SharkSpecies::newAgent);
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(fishBuilder)
                 .addAgentsBuilder(sharkBuilder);

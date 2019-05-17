@@ -14,7 +14,7 @@ trait SpeciesObject extends Serializable {
 
   final def nextId(): String = {
     counter += 1
-    this.species.getClass.toString + counter
+    this.species.getClass.toString + (counter - 1)
   }
 
 }
