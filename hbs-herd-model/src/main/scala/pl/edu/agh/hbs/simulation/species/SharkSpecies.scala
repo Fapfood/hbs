@@ -4,10 +4,10 @@ import pl.edu.agh.hbs.model.skill.Modifier
 import pl.edu.agh.hbs.model.{Agent, ModifierBuffer, Species, SpeciesObject}
 import pl.edu.agh.hbs.simulation.agent.SharkAgent
 
-class Shark extends Species
+class SharkSpecies extends Species
 
-object Shark extends SpeciesObject {
-  override val species = new Shark
+object SharkSpecies extends SpeciesObject {
+  override val species = new SharkSpecies
 
   override def newAgent(initModifiers: Seq[Modifier], inheritedModifiers: ModifierBuffer): Agent = new SharkAgent(initModifiers, inheritedModifiers)
 }

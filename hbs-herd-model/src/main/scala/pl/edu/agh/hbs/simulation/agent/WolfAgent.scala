@@ -9,7 +9,7 @@ import pl.edu.agh.hbs.model.skill.moving.MovingAgent
 import pl.edu.agh.hbs.model.skill.predator.Predator
 import pl.edu.agh.hbs.model.skill.predator.modifier.ModHuntFor
 import pl.edu.agh.hbs.model.{Agent, ModifierBuffer}
-import pl.edu.agh.hbs.simulation.species.{Sheep, Wolf}
+import pl.edu.agh.hbs.simulation.species.{SheepSpecies, WolfSpecies}
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
@@ -22,9 +22,9 @@ class WolfAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: Mo
 
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
-    modifiers += ModHuntFor(Sheep)
-    modifiers += ModSpecies(Wolf)
-    modifiers += ModIdentifier(Wolf.nextId())
+    modifiers += ModHuntFor(SheepSpecies)
+    modifiers += ModSpecies(WolfSpecies)
+    modifiers += ModIdentifier(WolfSpecies.nextId())
     modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "wind")
     super.defaultModifiers() ++ modifiers
   }

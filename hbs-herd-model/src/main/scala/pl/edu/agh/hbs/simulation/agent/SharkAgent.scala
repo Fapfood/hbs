@@ -10,7 +10,7 @@ import pl.edu.agh.hbs.model.skill.moving.MovingAgent
 import pl.edu.agh.hbs.model.skill.predator.Predator
 import pl.edu.agh.hbs.model.skill.predator.modifier.ModHuntFor
 import pl.edu.agh.hbs.model.{Agent, ModifierBuffer}
-import pl.edu.agh.hbs.simulation.species.{Fish, Shark}
+import pl.edu.agh.hbs.simulation.species.{FishSpecies, SharkSpecies}
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
@@ -24,9 +24,9 @@ class SharkAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: M
 
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
-    modifiers += ModHuntFor(Fish)
-    modifiers += ModSpecies(Shark)
-    modifiers += ModIdentifier(Shark.nextId())
+    modifiers += ModHuntFor(FishSpecies)
+    modifiers += ModSpecies(SharkSpecies)
+    modifiers += ModIdentifier(SharkSpecies.nextId())
     modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "current")
     super.defaultModifiers() ++ modifiers
   }

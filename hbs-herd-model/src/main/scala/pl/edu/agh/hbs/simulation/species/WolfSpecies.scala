@@ -1,13 +1,13 @@
 package pl.edu.agh.hbs.simulation.species
 
 import pl.edu.agh.hbs.model.skill.Modifier
-import pl.edu.agh.hbs.model.{ModifierBuffer, SpeciesObject}
+import pl.edu.agh.hbs.model.{ModifierBuffer, Species, SpeciesObject}
 import pl.edu.agh.hbs.simulation.agent.WolfAgent
 
-class WolfAlpha extends Wolf
+class WolfSpecies extends Species
 
-object WolfAlpha extends SpeciesObject {
-  val species = new WolfAlpha
+object WolfSpecies extends SpeciesObject {
+  override val species = new WolfSpecies
 
   override def newAgent(initModifiers: Seq[Modifier], inheritedModifiers: ModifierBuffer) = new WolfAgent(initModifiers, inheritedModifiers)
 }
