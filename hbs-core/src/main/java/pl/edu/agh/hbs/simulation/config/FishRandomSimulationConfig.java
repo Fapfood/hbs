@@ -1,10 +1,7 @@
 package pl.edu.agh.hbs.simulation.config;
 
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
-import pl.edu.agh.hbs.simulation.generic.GenericAgentListBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericCombinedAgentListBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericSimulationConfigWithBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericSingleSpeciesAgentListBuilder;
+import pl.edu.agh.hbs.simulation.generic.*;
 import pl.edu.agh.hbs.simulation.species.FishSpecies;
 import pl.edu.agh.hbs.simulation.species.SharkSpecies;
 import pl.edu.agh.hbs.ui.Representation;
@@ -33,5 +30,10 @@ public class FishRandomSimulationConfig extends GenericSimulationConfigWithBuild
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(fishBuilder)
                 .addAgentsBuilder(sharkBuilder);
+    }
+
+    @Override
+    public GenericPatchListBuilder getPatchBuilder() {
+        return null;
     }
 }

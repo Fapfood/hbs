@@ -1,26 +1,35 @@
 package pl.edu.agh.hbs.simulation.generic;
 
 import pl.edu.agh.hbs.model.Agent;
+import pl.edu.agh.hbs.model.EnvironmentConfig;
 import pl.edu.agh.hbs.model.Vector;
+import pl.edu.agh.hbs.model.skill.patch.Patch;
 import pl.edu.agh.hbs.simulation.api.Area;
 import pl.edu.agh.hbs.simulation.api.Step;
 import pl.edu.agh.hbs.simulation.cartesian.CartesianRectangularBordersDefinition;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public abstract class GenericSimulationConfigWithBuilder implements GenericSimulationConfig {
     public abstract GenericAgentListBuilder getAgentsBuilder();
+    public abstract GenericPatchListBuilder getPatchBuilder();
 
     @Override
-    public Collection<Agent> getAgents() {
-        return getAgentsBuilder().build();
+    public Collection<Agent> getAgents(EnvironmentConfig environmentConfig) {
+        return getAgentsBuilder().build(environmentConfig);
     }
 
     @Override
-    public List<? extends Area> getAreas(Step step) {
+    public Collection<Agent> getPatches(EnvironmentConfig environmentConfig) {
+        GenericPatchListBuilder builder = getPatchBuilder();
+        if (builder == null){
+            return Collections.emptyList();
+        }
+        return getPatchBuilder().build(environmentConfig);
+    }
+
+    @Override
+    public List<Area> getAreas(Step step) {
         return Arrays.asList(
                 new GenericArea(
                         "area-1",

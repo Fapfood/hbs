@@ -1,23 +1,29 @@
 package pl.edu.agh.hbs.simulation.config;
 
+import pl.edu.agh.hbs.model.skill.Modifier;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
-import pl.edu.agh.hbs.simulation.generic.GenericAgentListBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericCombinedAgentListBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericSimulationConfigWithBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericSingleSpeciesAgentListBuilder;
+import pl.edu.agh.hbs.model.skill.diPatch.modifier.ModTerrain;
+import pl.edu.agh.hbs.simulation.generic.*;
+import pl.edu.agh.hbs.simulation.species.GrassSpecies;
 import pl.edu.agh.hbs.simulation.species.SheepSpecies;
 import pl.edu.agh.hbs.simulation.species.WolfSpecies;
 import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
+import scala.collection.JavaConverters;
+import scala.collection.Seq;
+
+import java.util.List;
 
 public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuilder {
 
     private Representation sheepShape;
     private Representation wolfShape;
+    private Representation grassShape;
 
-    public SheepRandomSimulationConfig(Representation sheepShape, Representation wolfShape) {
+    public SheepRandomSimulationConfig(Representation sheepShape, Representation wolfShape, Representation grassShape) {
         this.sheepShape = sheepShape;
         this.wolfShape = wolfShape;
+        this.grassShape = grassShape;
     }
 
     @Override
@@ -33,5 +39,24 @@ public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuil
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(sheepBuilder)
                 .addAgentsBuilder(wolfBuilder);
+    }
+
+    @Override
+    public GenericPatchListBuilder getPatchBuilder() {
+        return new GenericRandomPatchListBuilder()
+                .addPatchBuilder((seq, buffer) -> {
+                    List<Modifier> modifierList = JavaConverters.seqAsJavaList(seq);
+                    modifierList.add(ModRepresentation.apply(grassShape, Colour.GREEN));
+                    modifierList.add(ModTerrain.apply("grass"));
+                    Seq<Modifier> modifierSeq = JavaConverters.asScalaIteratorConverter(modifierList.iterator()).asScala().toSeq();
+                    return GrassSpecies.newAgent(modifierSeq, buffer);
+                })
+                .addPatchBuilder((seq, buffer) -> {
+                    List<Modifier> modifierList = JavaConverters.seqAsJavaList(seq);
+                    modifierList.add(ModRepresentation.apply(grassShape, Colour.BROWN));
+                    modifierList.add(ModTerrain.apply("earth"));
+                    Seq<Modifier> modifierSeq = JavaConverters.asScalaIteratorConverter(modifierList.iterator()).asScala().toSeq();
+                    return GrassSpecies.newAgent(modifierSeq, buffer);
+                });
     }
 }
