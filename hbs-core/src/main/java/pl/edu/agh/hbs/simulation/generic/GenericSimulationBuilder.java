@@ -1,6 +1,8 @@
 package pl.edu.agh.hbs.simulation.generic;
 
 import pl.edu.agh.hbs.model.Agent;
+import pl.edu.agh.hbs.model.EnvironmentConfig;
+import pl.edu.agh.hbs.model.skill.patch.Patch;
 import pl.edu.agh.hbs.simulation.api.Area;
 
 import java.util.Collection;
@@ -11,15 +13,23 @@ public class GenericSimulationBuilder {
 
     private GenericAreaStep step;
     private GenericSimulationConfig config;
+    private EnvironmentConfig environmentConfig;
 
-    public GenericSimulationBuilder(GenericAreaStep step, GenericSimulationConfig config) {
+    public GenericSimulationBuilder(GenericAreaStep step, GenericSimulationConfig config, EnvironmentConfig environmentConfig) {
         this.step = step;
         this.config = config;
+        this.environmentConfig = environmentConfig;
     }
 
-    List<? extends Area> build() {
-        List<? extends Area> areas = config.getAreas(step);
-        Collection<Agent> agents = config.getAgents();
+    List<Area> build() {
+        List<Area> areas = config.getAreas(step);
+        Collection<Agent> agents = config.getAgents(environmentConfig);
+        Collection<Agent> patches = config.getPatches(environmentConfig);
+        //I am not sure if we should add patches using addAgents?
+        areas.forEach(area -> area.addAgents(patches.stream()
+                .filter(patch -> area.isInside(patch.position()))
+                .collect(Collectors.toList())
+        ));
         areas.forEach(area -> area.addAgents(agents.stream()
                 .filter(agent -> area.isInside(agent.position()))
                 .collect(Collectors.toList())

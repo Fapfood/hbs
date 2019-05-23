@@ -5,6 +5,6 @@ import pl.edu.agh.hbs.model.EnvironmentConfig;
 
 import java.util.Collection;
 
-public interface GenericAgentListBuilder {
+public interface GenericPatchListBuilder {
     Collection<Agent> build(EnvironmentConfig environmentConfig);
 }
