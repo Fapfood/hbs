@@ -7,7 +7,6 @@ import pl.edu.agh.hbs.model.Vector;
 import pl.edu.agh.hbs.model.skill.Modifier;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModEnvironmentConfig;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModPosition;
-import pl.edu.agh.hbs.model.skill.patch.Patch;
 import pl.edu.agh.hbs.model.skill.patch.modifier.ModOccupiedArea;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;

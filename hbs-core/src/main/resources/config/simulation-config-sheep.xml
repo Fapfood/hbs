@@ -27,7 +27,7 @@
     </bean>
 
     <bean id="grass" name="grass" class="pl.edu.agh.hbs.simulation.shape.BoxShape">
-        <constructor-arg name="factor" value="5"/>
+        <constructor-arg name="factor" value="10"/>
     </bean>
 
     <bean id="webClientConfigProvider" class="pl.edu.agh.hbs.simulation.WebClientConfigProviderImpl">

@@ -49,7 +49,7 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
                         step,
                         new CartesianRectangularBordersDefinition(
                                 Vector.of(1000, 0),
-                                Vector.of(2500, 1500),
+                                Vector.of(2000, 1500),
                                 false,
                                 true,
                                 true,
