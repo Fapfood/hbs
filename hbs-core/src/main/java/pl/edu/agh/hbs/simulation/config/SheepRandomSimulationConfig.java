@@ -12,6 +12,7 @@ import pl.edu.agh.hbs.ui.dto.Colour;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuilder {
@@ -45,14 +46,14 @@ public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuil
     public GenericPatchListBuilder getPatchBuilder() {
         return new GenericRandomPatchListBuilder()
                 .addPatchBuilder((seq, buffer) -> {
-                    List<Modifier> modifierList = JavaConverters.seqAsJavaList(seq);
+                    List<Modifier> modifierList = new LinkedList<>(JavaConverters.seqAsJavaList(seq));
                     modifierList.add(ModRepresentation.apply(grassShape, Colour.GREEN));
                     modifierList.add(ModTerrain.apply("grass"));
                     Seq<Modifier> modifierSeq = JavaConverters.asScalaIteratorConverter(modifierList.iterator()).asScala().toSeq();
                     return GrassSpecies.newAgent(modifierSeq, buffer);
                 })
                 .addPatchBuilder((seq, buffer) -> {
-                    List<Modifier> modifierList = JavaConverters.seqAsJavaList(seq);
+                    List<Modifier> modifierList = new LinkedList<>(JavaConverters.seqAsJavaList(seq));
                     modifierList.add(ModRepresentation.apply(grassShape, Colour.BROWN));
                     modifierList.add(ModTerrain.apply("earth"));
                     Seq<Modifier> modifierSeq = JavaConverters.asScalaIteratorConverter(modifierList.iterator()).asScala().toSeq();
