@@ -23,13 +23,13 @@ public class GenericRandomPatchListBuilder implements GenericPatchListBuilder {
     private List<BiFunction<Seq<Modifier>, ModifierBuffer, Agent>> patchBuilders = new LinkedList<>();
     private Vector positionMin = Vector.of(0, 0);
     private Vector positionMax = Vector.of(2000, 1500);
-    private Vector boxSize = Vector.of(100, 100);
 
     @Override
     public Collection<Agent> build(EnvironmentConfig environmentConfig) {
         List<Agent> patches = new LinkedList<>();
+        Vector boxSize = Vector.of(environmentConfig.patchHeight(),environmentConfig.patchWidth());
         for (int i = 0; i < (positionMax.get(0) - positionMin.get(0)) / boxSize.get(0); i++) {
-            for (int j = 0; j < (positionMax.get(1) / positionMin.get(1)) / boxSize.get(1); j++) {
+            for (int j = 0; j < (positionMax.get(1) - positionMin.get(1)) / boxSize.get(1); j++) {
                 Vector leftBottom = Vector.of(
                         positionMin.get(0) + i * boxSize.get(0),
                         positionMin.get(1) + j * boxSize.get(1)
@@ -78,11 +78,6 @@ public class GenericRandomPatchListBuilder implements GenericPatchListBuilder {
 
     public GenericRandomPatchListBuilder setPositionMax(Vector positionMax) {
         this.positionMax = positionMax;
-        return this;
-    }
-
-    public GenericRandomPatchListBuilder setBoxSize(Vector boxSize) {
-        this.boxSize = boxSize;
         return this;
     }
 }

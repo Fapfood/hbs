@@ -30,12 +30,12 @@ public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuil
     @Override
     public GenericAgentListBuilder getAgentsBuilder() {
         GenericAgentListBuilder sheepBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(10)
-                .setRepresentation(ModRepresentation.apply(sheepShape, Colour.GREEN))
+                .setNumber(5)
+                .setRepresentation(ModRepresentation.apply(sheepShape, Colour.WHITE))
                 .setAgentBuilder(SheepSpecies::newAgent);
         GenericAgentListBuilder wolfBuilder = new GenericSingleSpeciesAgentListBuilder()
                 .setNumber(3)
-                .setRepresentation(ModRepresentation.apply(wolfShape, Colour.RED))
+                .setRepresentation(ModRepresentation.apply(wolfShape, Colour.BLACK))
                 .setAgentBuilder(WolfSpecies::newAgent);
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(sheepBuilder)
