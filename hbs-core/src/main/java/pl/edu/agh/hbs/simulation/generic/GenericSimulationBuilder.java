@@ -25,7 +25,6 @@ public class GenericSimulationBuilder {
         List<Area> areas = config.getAreas(step);
         Collection<Agent> agents = config.getAgents(environmentConfig);
         Collection<Agent> patches = config.getPatches(environmentConfig);
-        //I am not sure if we should add patches using addAgents?
         areas.forEach(area -> area.addAgents(patches.stream()
                 .filter(patch -> area.isInside(patch.position()))
                 .collect(Collectors.toList())
