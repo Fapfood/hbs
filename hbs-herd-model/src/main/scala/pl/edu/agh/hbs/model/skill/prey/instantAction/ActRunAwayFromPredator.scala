@@ -21,7 +21,7 @@ object ActRunAwayFromPredator extends Action {
       (perceivedCentreOfMass - position) * predatorFactor
     } else model.Vector()
 
-    modifiers.update(ModVelocity(predatorVelocity, "predator"))
+    modifiers.update(ModVelocity(-predatorVelocity, "predator"))
     new StepOutput()
   }
 }

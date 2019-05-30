@@ -1,6 +1,7 @@
 package pl.edu.agh.hbs.model.skill.predator
 
 import pl.edu.agh.hbs.model.skill.Modifier
+import pl.edu.agh.hbs.model.skill.common.instantAction.ActCapEnergy
 import pl.edu.agh.hbs.model.skill.common.modifier.ModEnergy
 import pl.edu.agh.hbs.model.skill.predator.decision.DecHunt
 import pl.edu.agh.hbs.model.skill.predator.instantAction.ActFollowPrey
@@ -12,6 +13,7 @@ import scala.collection.mutable.ListBuffer
 trait Predator extends Agent {
   this.decisions += DecHunt
   this.beforeStepActions += ActFollowPrey
+  this.afterStepActions += ActCapEnergy
 
   override def modifiersCopiedFromParent(inherited: ModifierBuffer): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
@@ -26,6 +28,7 @@ trait Predator extends Agent {
     val modifiers = ListBuffer.empty[Modifier]
     modifiers += ModEnergy(400, "standard")
     modifiers += ModEnergy(50, "eaten")
+    modifiers += ModEnergy(500, "max")
     modifiers += ModHuntParameters(100)
     modifiers += ModFollowPreyParameters(0.4)
     super.defaultModifiers() ++ modifiers

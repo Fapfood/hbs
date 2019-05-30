@@ -54,6 +54,7 @@ abstract class Agent(private val initModifiers: Seq[Modifier], private val inher
 
   def modifiersCopiedFromParent(inherited: ModifierBuffer): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
+    inherited.getAll[ModEnvironmentConfig].foreach(m => modifiers += m.copy())
     inherited.getAll[ModPosition].foreach(m => modifiers += m.copy())
     inherited.getAll[ModRepresentation].foreach(m => modifiers += m.copy())
     modifiers
@@ -86,6 +87,9 @@ abstract class Agent(private val initModifiers: Seq[Modifier], private val inher
 
   def id(): String = modifiers.getFirst[ModIdentifier].id
 
+  def setConfig(config: EnvironmentConfig): Unit = {
+    modifiers.update(ModEnvironmentConfig(config))
+  }
 
   def canEqual(other: Any): Boolean = other.isInstanceOf[Agent]
 

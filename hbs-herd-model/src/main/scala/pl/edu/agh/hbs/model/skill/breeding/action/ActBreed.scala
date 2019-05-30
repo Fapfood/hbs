@@ -9,13 +9,16 @@ import pl.edu.agh.hbs.model.skill.common.modifier.{ModTimer, ModVelocity}
 import pl.edu.agh.hbs.model.{ModifierBuffer, StepOutput}
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Random
 
 object ActBreed extends Action {
 
   override def stepsDuration: Int = 1
 
   override def action(modifiers: ModifierBuffer): StepOutput = {
-    modifiers.update(ModTimer(0, "breed"))
+    val breedThreshold = modifiers.getFirst[ModBreedParameters].breedTimer
+    val rand = new Random()
+    modifiers.update(ModTimer(rand.nextInt(breedThreshold / 2), "breed"))
 
     val species = modifiers.getFirst[ModSpecies].species
     val radius = modifiers.getFirst[ModBreedParameters].propagationRadius
