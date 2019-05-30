@@ -1,15 +1,14 @@
 package pl.edu.agh.hbs.model.skill.diPatch
 
-import pl.edu.agh.hbs.model.ModifierBuffer
 import pl.edu.agh.hbs.model.skill.Modifier
 import pl.edu.agh.hbs.model.skill.diPatch.instantAction.ActChangeState
 import pl.edu.agh.hbs.model.skill.diPatch.modifier.{ModChangeStateParameters, ModTerrain}
-import pl.edu.agh.hbs.model.skill.patch.Patch
+import pl.edu.agh.hbs.model.{Agent, ModifierBuffer}
 import pl.edu.agh.hbs.ui.dto.Colour
 
 import scala.collection.mutable.ListBuffer
 
-trait DiPatch extends Patch {
+trait DiPatch extends Agent {
   this.afterStepActions += ActChangeState
 
   override def modifiersCopiedFromParent(inherited: ModifierBuffer): Seq[Modifier] = {

@@ -1,6 +1,7 @@
 package pl.edu.agh.hbs.simulation.api;
 
 import pl.edu.agh.hbs.model.Agent;
+import pl.edu.agh.hbs.model.EnvironmentConfig;
 import pl.edu.agh.hbs.model.Vector;
 import pl.edu.agh.hbs.model.skill.Message;
 
@@ -18,14 +19,16 @@ public abstract class Area implements Serializable {
     private final Collection<Message> messages;
     private final Collection<String> neighbourAreas;
     private transient final Step step;
+    private final EnvironmentConfig config;
 
-    public Area(String areaId, Step step, AreaBordersDefinition areaBordersDefinition, Collection<Agent> agents) {
+    public Area(String areaId, Step step, AreaBordersDefinition areaBordersDefinition, Collection<Agent> agents, EnvironmentConfig config) {
         this.areaId = areaId;
         this.step = step;
         this.agents = Collections.newSetFromMap(new ConcurrentHashMap<>());
         this.messages = Collections.newSetFromMap(new ConcurrentHashMap<>());
         this.neighbourAreas = Collections.newSetFromMap(new ConcurrentHashMap<>());
         this.areaBordersDefinition = areaBordersDefinition;
+        this.config = config;
 
         this.agents.addAll(agents);
     }
@@ -39,6 +42,7 @@ public abstract class Area implements Serializable {
     }
 
     public void addAgents(Collection<Agent> agents) {
+        agents.forEach(a -> a.setConfig(config));
         this.agents.addAll(agents);
     }
 
