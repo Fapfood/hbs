@@ -1,9 +1,10 @@
-package pl.edu.agh.hbs.simulation.generic;
+package pl.edu.agh.hbs.simulation.generic.config;
 
 import pl.edu.agh.hbs.model.Agent;
 import pl.edu.agh.hbs.model.EnvironmentConfig;
-import pl.edu.agh.hbs.model.skill.patch.Patch;
 import pl.edu.agh.hbs.simulation.api.Area;
+import pl.edu.agh.hbs.simulation.generic.GenericAreaStep;
+import pl.edu.agh.hbs.simulation.generic.config.GenericSimulationConfig;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,8 +22,8 @@ public class GenericSimulationBuilder {
         this.environmentConfig = environmentConfig;
     }
 
-    List<Area> build() {
-        List<Area> areas = config.getAreas(step);
+    public List<Area> build() {
+        List<Area> areas = config.getAreas(step, environmentConfig);
         Collection<Agent> agents = config.getAgents(environmentConfig);
         Collection<Agent> patches = config.getPatches(environmentConfig);
         areas.forEach(area -> area.addAgents(patches.stream()

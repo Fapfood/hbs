@@ -1,7 +1,8 @@
 package pl.edu.agh.hbs.simulation.config;
 
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
-import pl.edu.agh.hbs.simulation.generic.*;
+import pl.edu.agh.hbs.simulation.generic.builders.*;
+import pl.edu.agh.hbs.simulation.generic.config.GenericSimulationConfigWithBuilder;
 import pl.edu.agh.hbs.simulation.species.FishSpecies;
 import pl.edu.agh.hbs.simulation.species.SharkSpecies;
 import pl.edu.agh.hbs.ui.Representation;
@@ -33,7 +34,12 @@ public class FishRandomSimulationConfig extends GenericSimulationConfigWithBuild
     }
 
     @Override
-    public GenericPatchListBuilder getPatchBuilder() {
+    public GenericAgentListBuilder getPatchBuilder() {
         return null;
+    }
+
+    @Override
+    public GenericAreaListBuilder getAreasBuilder() {
+        return new RandomAreaListBuilder().setNumberOfAreas(2L);
     }
 }

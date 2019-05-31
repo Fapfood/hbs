@@ -1,4 +1,4 @@
-package pl.edu.agh.hbs.simulation.generic;
+package pl.edu.agh.hbs.simulation.generic.builders;
 
 import pl.edu.agh.hbs.model.Agent;
 import pl.edu.agh.hbs.model.EnvironmentConfig;
@@ -12,7 +12,7 @@ public class GenericCombinedAgentListBuilder implements GenericAgentListBuilder 
     private List<GenericAgentListBuilder> agentsBuilders = new LinkedList<>();
 
     @Override
-    public Collection<Agent> build(EnvironmentConfig environmentConfig) {
+    public List<Agent> build(EnvironmentConfig environmentConfig) {
         return agentsBuilders.stream().map(builder -> builder.build(environmentConfig))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());

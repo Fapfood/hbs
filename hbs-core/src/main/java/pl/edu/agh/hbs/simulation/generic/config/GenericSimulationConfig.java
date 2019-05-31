@@ -1,4 +1,4 @@
-package pl.edu.agh.hbs.simulation.generic;
+package pl.edu.agh.hbs.simulation.generic.config;
 
 import pl.edu.agh.hbs.model.Agent;
 import pl.edu.agh.hbs.model.EnvironmentConfig;
@@ -13,5 +13,5 @@ public interface GenericSimulationConfig {
 
     Collection<Agent> getPatches(EnvironmentConfig environmentConfig);
 
-    List<Area> getAreas(Step step);
+    List<Area> getAreas(Step step, EnvironmentConfig environmentConfig);
 }

@@ -3,7 +3,8 @@ package pl.edu.agh.hbs.simulation.config;
 import pl.edu.agh.hbs.model.skill.Modifier;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
 import pl.edu.agh.hbs.model.skill.diPatch.modifier.ModTerrain;
-import pl.edu.agh.hbs.simulation.generic.*;
+import pl.edu.agh.hbs.simulation.generic.builders.*;
+import pl.edu.agh.hbs.simulation.generic.config.GenericSimulationConfigWithBuilder;
 import pl.edu.agh.hbs.simulation.species.GrassSpecies;
 import pl.edu.agh.hbs.simulation.species.SheepSpecies;
 import pl.edu.agh.hbs.simulation.species.WolfSpecies;
@@ -30,11 +31,11 @@ public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuil
     @Override
     public GenericAgentListBuilder getAgentsBuilder() {
         GenericAgentListBuilder sheepBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(5)
+                .setNumber(0)
                 .setRepresentation(ModRepresentation.apply(sheepShape, Colour.WHITE))
                 .setAgentBuilder(SheepSpecies::newAgent);
         GenericAgentListBuilder wolfBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(3)
+                .setNumber(0)
                 .setRepresentation(ModRepresentation.apply(wolfShape, Colour.BLACK))
                 .setAgentBuilder(WolfSpecies::newAgent);
         return new GenericCombinedAgentListBuilder()
@@ -43,7 +44,7 @@ public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuil
     }
 
     @Override
-    public GenericPatchListBuilder getPatchBuilder() {
+    public GenericAgentListBuilder getPatchBuilder() {
         return new GenericRandomPatchListBuilder()
                 .addPatchBuilder((seq, buffer) -> {
                     List<Modifier> modifierList = new LinkedList<>(JavaConverters.seqAsJavaList(seq));
@@ -59,5 +60,10 @@ public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuil
                     Seq<Modifier> modifierSeq = JavaConverters.asScalaIteratorConverter(modifierList.iterator()).asScala().toSeq();
                     return GrassSpecies.newAgent(modifierSeq, buffer);
                 });
+    }
+
+    @Override
+    public GenericAreaListBuilder getAreasBuilder() {
+        return new RandomAreaListBuilder().setNumberOfAreas(2L);
     }
 }

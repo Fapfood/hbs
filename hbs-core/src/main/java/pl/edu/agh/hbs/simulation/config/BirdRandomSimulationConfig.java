@@ -1,10 +1,11 @@
 package pl.edu.agh.hbs.simulation.config;
 
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
-import pl.edu.agh.hbs.simulation.generic.GenericAgentListBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericPatchListBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericSimulationConfigWithBuilder;
-import pl.edu.agh.hbs.simulation.generic.GenericSingleSpeciesAgentListBuilder;
+import pl.edu.agh.hbs.simulation.generic.builders.GenericAgentListBuilder;
+import pl.edu.agh.hbs.simulation.generic.builders.GenericAreaListBuilder;
+import pl.edu.agh.hbs.simulation.generic.builders.RandomAreaListBuilder;
+import pl.edu.agh.hbs.simulation.generic.config.GenericSimulationConfigWithBuilder;
+import pl.edu.agh.hbs.simulation.generic.builders.GenericSingleSpeciesAgentListBuilder;
 import pl.edu.agh.hbs.simulation.species.BirdSpecies;
 import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
@@ -26,7 +27,12 @@ public class BirdRandomSimulationConfig extends GenericSimulationConfigWithBuild
     }
 
     @Override
-    public GenericPatchListBuilder getPatchBuilder() {
+    public GenericAgentListBuilder getPatchBuilder() {
         return null;
+    }
+
+    @Override
+    public GenericAreaListBuilder getAreasBuilder() {
+        return new RandomAreaListBuilder().setNumberOfAreas(2L);
     }
 }
