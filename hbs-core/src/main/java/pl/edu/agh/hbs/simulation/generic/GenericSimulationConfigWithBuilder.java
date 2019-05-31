@@ -3,7 +3,6 @@ package pl.edu.agh.hbs.simulation.generic;
 import pl.edu.agh.hbs.model.Agent;
 import pl.edu.agh.hbs.model.EnvironmentConfig;
 import pl.edu.agh.hbs.model.Vector;
-import pl.edu.agh.hbs.model.skill.patch.Patch;
 import pl.edu.agh.hbs.simulation.api.Area;
 import pl.edu.agh.hbs.simulation.api.Step;
 import pl.edu.agh.hbs.simulation.cartesian.CartesianRectangularBordersDefinition;
@@ -12,6 +11,7 @@ import java.util.*;
 
 public abstract class GenericSimulationConfigWithBuilder implements GenericSimulationConfig {
     public abstract GenericAgentListBuilder getAgentsBuilder();
+
     public abstract GenericPatchListBuilder getPatchBuilder();
 
     @Override
@@ -22,14 +22,14 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
     @Override
     public Collection<Agent> getPatches(EnvironmentConfig environmentConfig) {
         GenericPatchListBuilder builder = getPatchBuilder();
-        if (builder == null){
+        if (builder == null) {
             return Collections.emptyList();
         }
         return getPatchBuilder().build(environmentConfig);
     }
 
     @Override
-    public List<Area> getAreas(Step step) {
+    public List<Area> getAreas(Step step, EnvironmentConfig environmentConfig) {
         return Arrays.asList(
                 new GenericArea(
                         "area-1",
@@ -42,7 +42,8 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
                                 true,
                                 true
                         ),
-                        new LinkedList<>()
+                        new LinkedList<>(),
+                        environmentConfig
                 ),
                 new GenericArea(
                         "area-2",
@@ -55,7 +56,8 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
                                 true,
                                 true
                         ),
-                        new LinkedList<>()
+                        new LinkedList<>(),
+                        environmentConfig
                 )
         );
     }

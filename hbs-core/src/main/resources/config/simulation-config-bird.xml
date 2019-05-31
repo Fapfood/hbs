@@ -37,6 +37,14 @@
         <constructor-arg name="builder">
             <bean class="pl.edu.agh.hbs.simulation.generic.GenericSimulationBuilder">
                 <constructor-arg name="step" ref="genericStep"/>
+                <constructor-arg name="environmentConfig">
+                    <bean class="pl.edu.agh.hbs.model.EnvironmentConfig">
+                        <constructor-arg name="width" value="2000"/>
+                        <constructor-arg name="height" value="1500"/>
+                        <constructor-arg name="patchHeight" value="100"/>
+                        <constructor-arg name="patchWidth" value="100"/>
+                    </bean>
+                </constructor-arg>
                 <constructor-arg name="config">
                     <bean class="pl.edu.agh.hbs.simulation.config.BirdRandomSimulationConfig">
                         <constructor-arg name="birdShape" ref="bird"/>

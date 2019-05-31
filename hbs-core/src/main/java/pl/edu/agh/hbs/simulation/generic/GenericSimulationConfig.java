@@ -13,5 +13,5 @@ public interface GenericSimulationConfig {
 
     Collection<Agent> getPatches(EnvironmentConfig environmentConfig);
 
-    List<Area> getAreas(Step step);
+    List<Area> getAreas(Step step, EnvironmentConfig environmentConfig);
 }

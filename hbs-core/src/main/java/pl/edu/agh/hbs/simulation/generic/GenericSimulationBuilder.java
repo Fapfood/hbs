@@ -22,7 +22,7 @@ public class GenericSimulationBuilder {
     }
 
     List<Area> build() {
-        List<Area> areas = config.getAreas(step);
+        List<Area> areas = config.getAreas(step, environmentConfig);
         Collection<Agent> agents = config.getAgents(environmentConfig);
         Collection<Agent> patches = config.getPatches(environmentConfig);
         areas.forEach(area -> area.addAgents(patches.stream()
