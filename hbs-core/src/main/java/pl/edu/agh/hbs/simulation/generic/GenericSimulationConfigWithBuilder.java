@@ -30,6 +30,8 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
 
     @Override
     public List<Area> getAreas(Step step, EnvironmentConfig environmentConfig) {
+        EnvironmentConfig environmentConfig1 = new EnvironmentConfig(environmentConfig.width(), environmentConfig.height(), environmentConfig.patchWidth(), environmentConfig.patchHeight());
+        EnvironmentConfig environmentConfig2 = new EnvironmentConfig(environmentConfig.width(), environmentConfig.height(), environmentConfig.patchWidth(), environmentConfig.patchHeight());
         return Arrays.asList(
                 new GenericArea(
                         "area-1",
@@ -43,7 +45,7 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
                                 true
                         ),
                         new LinkedList<>(),
-                        environmentConfig
+                        environmentConfig1
                 ),
                 new GenericArea(
                         "area-2",
@@ -57,7 +59,7 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
                                 true
                         ),
                         new LinkedList<>(),
-                        environmentConfig
+                        environmentConfig2
                 )
         );
     }
