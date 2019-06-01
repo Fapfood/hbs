@@ -29,7 +29,7 @@ trait Predator extends Agent {
     modifiers += ModEnergy(400, "standard")
     modifiers += ModEnergy(50, "eaten")
     modifiers += ModEnergy(500, "max")
-    modifiers += ModHuntParameters(100)
+    modifiers += ModHuntParameters(30)
     modifiers += ModFollowPreyParameters(0.4)
     super.defaultModifiers() ++ modifiers
   }

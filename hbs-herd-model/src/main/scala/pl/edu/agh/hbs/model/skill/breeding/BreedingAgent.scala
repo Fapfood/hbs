@@ -7,6 +7,7 @@ import pl.edu.agh.hbs.model.skill.common.modifier.ModTimer
 import pl.edu.agh.hbs.model.{Agent, ModifierBuffer}
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Random
 
 trait BreedingAgent extends Agent {
   this.decisions += DecBreed
@@ -19,8 +20,10 @@ trait BreedingAgent extends Agent {
 
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
-    modifiers += ModBreedParameters(40, 1000)
-    modifiers += ModTimer(0, "breed")
+    val breedParameters = ModBreedParameters(50, 400)
+    modifiers += breedParameters
+    val rand = new Random()
+    modifiers += ModTimer(rand.nextInt(breedParameters.breedTimer / 5), "breed")
     super.defaultModifiers() ++ modifiers
   }
 }

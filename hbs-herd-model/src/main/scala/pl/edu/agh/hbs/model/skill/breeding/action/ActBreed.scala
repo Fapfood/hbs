@@ -18,12 +18,13 @@ object ActBreed extends Action {
   override def action(modifiers: ModifierBuffer): StepOutput = {
     val breedThreshold = modifiers.getFirst[ModBreedParameters].breedTimer
     val rand = new Random()
-    modifiers.update(ModTimer(rand.nextInt(breedThreshold / 2), "breed"))
+    modifiers.update(ModTimer(rand.nextInt(breedThreshold / 5), "breed"))
 
     val species = modifiers.getFirst[ModSpecies].species
     val radius = modifiers.getFirst[ModBreedParameters].propagationRadius
 
     val child = species.newAgent(Seq(), modifiers)
+    species.incCounter()
     val childModifiers = child.modifiers
     val childVelocity = childModifiers.getFirst[ModVelocity]("standard").velocity
     val childPosition = childModifiers.getFirst[ModPosition].position
