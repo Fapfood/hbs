@@ -3,6 +3,7 @@ package pl.edu.agh.hbs.simulation.agent
 import pl.edu.agh.hbs.model
 import pl.edu.agh.hbs.model.skill.Modifier
 import pl.edu.agh.hbs.model.skill.basic.modifier.{ModIdentifier, ModSpecies}
+import pl.edu.agh.hbs.model.skill.breeding.BreedingAgent
 import pl.edu.agh.hbs.model.skill.common.modifier.ModVelocity
 import pl.edu.agh.hbs.model.skill.dying.DyingAgent
 import pl.edu.agh.hbs.model.skill.moving.MovingAgent
@@ -18,6 +19,7 @@ class WolfAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: Mo
   extends Agent(initModifiers, inheritedModifiers)
     with MovingAgent
     with DyingAgent
+    with BreedingAgent
     with Predator {
 
   override def defaultModifiers(): Seq[Modifier] = {
