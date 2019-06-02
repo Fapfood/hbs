@@ -22,9 +22,9 @@ trait FlockingAgent extends Agent {
 
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
-    modifiers += ModCohesionVelocityParameters(1 / 7.5)
-    modifiers += ModSeparationVelocityParameters(1, 25)
-    modifiers += ModAlignmentVelocityParameters(0.5)
+    modifiers += ModCohesionVelocityParameters(2.0 / 15, 200)
+    modifiers += ModSeparationVelocityParameters(1.0, 25)
+    modifiers += ModAlignmentVelocityParameters(1.0 / 2, 200)
     super.defaultModifiers() ++ modifiers
   }
 }

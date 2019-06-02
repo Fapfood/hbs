@@ -11,11 +11,13 @@ object ActCohesionVelocity extends Action {
 
   override def action(modifiers: ModifierBuffer): StepOutput = {
     val position = modifiers.getFirst[ModPosition].position
+    val maxDistance = modifiers.getFirst[ModCohesionVelocityParameters].maxDistance
     val cohesionFactor = modifiers.getFirst[ModCohesionVelocityParameters].cohesionFactor
     val species = modifiers.getFirst[ModSpecies].species
     val neighbours = modifiers.getAll[ModNeighbour]
-      .filter(m => species.species.getClass.isAssignableFrom(m.species.species.getClass)
-        || m.species.species.getClass.isAssignableFrom(species.species.getClass))
+      .filter(m => (species.species.getClass.isAssignableFrom(m.species.species.getClass)
+        || m.species.species.getClass.isAssignableFrom(species.species.getClass) &&
+        m.position.distance(position) < maxDistance))
 
     //cohesion / clumping
     val cohesionVelocity = if (neighbours.nonEmpty) {
