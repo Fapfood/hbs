@@ -7,7 +7,6 @@ import pl.edu.agh.hbs.model.skill.breeding.BreedingAgent
 import pl.edu.agh.hbs.model.skill.common.modifier.{ModEnergy, ModVelocity}
 import pl.edu.agh.hbs.model.skill.dying.DyingAgent
 import pl.edu.agh.hbs.model.skill.flocking.FlockingAgent
-import pl.edu.agh.hbs.model.skill.herbivore.Herbivore
 import pl.edu.agh.hbs.model.skill.moving.MovingAgent
 import pl.edu.agh.hbs.model.skill.prey.Prey
 import pl.edu.agh.hbs.model.skill.prey.modifier.ModFearOf
@@ -23,7 +22,6 @@ class SheepAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: M
     with FlockingAgent
     with BreedingAgent
     with DyingAgent
-    with Herbivore
     with Prey {
 
   override def defaultModifiers(): Seq[Modifier] = {
@@ -31,8 +29,8 @@ class SheepAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: M
     modifiers += ModFearOf(WolfSpecies)
     modifiers += ModSpecies(SheepSpecies)
     modifiers += ModIdentifier(SheepSpecies.nextId())
-    modifiers += ModEnergy(1, "consumed")
-    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "wind")
+    modifiers += ModEnergy(0, "consumed")
+    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "random")
     super.defaultModifiers() ++ modifiers
   }
 }

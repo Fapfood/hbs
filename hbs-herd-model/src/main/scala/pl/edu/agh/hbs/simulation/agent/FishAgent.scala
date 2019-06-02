@@ -28,7 +28,7 @@ class FishAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: Mo
     modifiers += ModSpecies(FishSpecies)
     modifiers += ModIdentifier(FishSpecies.nextId())
     modifiers += ModEnergy(0, "consumed")
-    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "current")
+    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "random")
     super.defaultModifiers() ++ modifiers
   }
 }

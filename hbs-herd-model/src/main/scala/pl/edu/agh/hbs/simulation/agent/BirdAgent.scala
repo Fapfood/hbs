@@ -20,7 +20,7 @@ class BirdAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: Mo
     val modifiers = ListBuffer.empty[Modifier]
     modifiers += ModSpecies(BirdSpecies)
     modifiers += ModIdentifier(BirdSpecies.nextId())
-    modifiers += ModVelocity(model.Vector(10.0, 0.0), "wind")
+    modifiers += ModVelocity(model.Vector(10.0, 0.0), "random")
     super.defaultModifiers() ++ modifiers
   }
 }

@@ -27,7 +27,7 @@ class SharkAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: M
     modifiers += ModHuntFor(FishSpecies)
     modifiers += ModSpecies(SharkSpecies)
     modifiers += ModIdentifier(SharkSpecies.nextId())
-    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "current")
+    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "random")
     super.defaultModifiers() ++ modifiers
   }
 }

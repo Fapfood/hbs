@@ -27,7 +27,7 @@ class WolfAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: Mo
     modifiers += ModHuntFor(SheepSpecies)
     modifiers += ModSpecies(WolfSpecies)
     modifiers += ModIdentifier(WolfSpecies.nextId())
-    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "wind")
+    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "random")
     super.defaultModifiers() ++ modifiers
   }
 }
