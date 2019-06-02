@@ -17,13 +17,12 @@ trait SpeciesObject extends Serializable {
   private var currentInClassCounter = 0
 
   final def nextId(): String = {
+    currentInClassCounter += 1
     allInClassCounter += 1
     this.species.getClass.toString + (allInClassCounter - 1)
   }
 
   def isMaxReached: Boolean = currentInClassCounter >= maxNumberOfSpecies
-
-  def incCounter(): Unit = currentInClassCounter += 1
 
   def decCounter(): Unit = currentInClassCounter -= 1
 

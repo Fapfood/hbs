@@ -24,7 +24,6 @@ object ActBreed extends Action {
     val radius = modifiers.getFirst[ModBreedParameters].propagationRadius
 
     val child = species.newAgent(Seq(), modifiers)
-    species.incCounter()
     val childModifiers = child.modifiers
     val childVelocity = childModifiers.getFirst[ModVelocity]("standard").velocity
     val childPosition = childModifiers.getFirst[ModPosition].position
