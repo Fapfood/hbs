@@ -40,6 +40,8 @@
                 <constructor-arg name="config">
                     <bean class="pl.edu.agh.hbs.simulation.config.BirdRandomSimulationConfig">
                         <constructor-arg name="birdShape" ref="bird"/>
+                        <constructor-arg name="birdColour" value="ORANGE"/>
+                        <constructor-arg name="birdNumber" value="17"/>
                     </bean>
                 </constructor-arg>
             </bean>

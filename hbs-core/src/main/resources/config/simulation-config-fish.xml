@@ -45,7 +45,11 @@
                 <constructor-arg name="config">
                     <bean class="pl.edu.agh.hbs.simulation.config.FishRandomSimulationConfig">
                         <constructor-arg name="fishShape" ref="fish"/>
+                        <constructor-arg name="fishColour" value="YELLOW"/>
+                        <constructor-arg name="fishNumber" value="10"/>
                         <constructor-arg name="sharkShape" ref="shark"/>
+                        <constructor-arg name="sharkColour" value="RED"/>
+                        <constructor-arg name="sharkNumber" value="2"/>
                     </bean>
                 </constructor-arg>
             </bean>

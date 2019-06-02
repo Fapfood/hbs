@@ -11,24 +11,32 @@ import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
 
 public class FishRandomSimulationConfig extends GenericSimulationConfigWithBuilder {
-
     private Representation fishShape;
+    private Colour fishColour;
+    private Integer fishNumber;
     private Representation sharkShape;
+    private Colour sharkColour;
+    private Integer sharkNumber;
 
-    public FishRandomSimulationConfig(Representation fishShape, Representation sharkShape) {
+    public FishRandomSimulationConfig(Representation fishShape, Colour fishColour, Integer fishNumber,
+                                      Representation sharkShape, Colour sharkColour, Integer sharkNumber) {
         this.fishShape = fishShape;
+        this.fishColour = fishColour;
+        this.fishNumber = fishNumber;
         this.sharkShape = sharkShape;
+        this.sharkColour = sharkColour;
+        this.sharkNumber = sharkNumber;
     }
 
     @Override
     public GenericAgentListBuilder getAgentsBuilder() {
         GenericAgentListBuilder fishBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(6)
-                .setRepresentation(ModRepresentation.apply(fishShape, Colour.GREEN))
+                .setNumber(fishNumber)
+                .setRepresentation(ModRepresentation.apply(fishShape, fishColour))
                 .setAgentBuilder(FishSpecies::newAgent);
         GenericAgentListBuilder sharkBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(3)
-                .setRepresentation(ModRepresentation.apply(sharkShape, Colour.RED))
+                .setNumber(sharkNumber)
+                .setRepresentation(ModRepresentation.apply(sharkShape, sharkColour))
                 .setAgentBuilder(SharkSpecies::newAgent);
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(fishBuilder)

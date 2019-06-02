@@ -11,24 +11,32 @@ import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
 
 public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuilder {
-
     private Representation sheepShape;
+    private Colour sheepColour;
+    private Integer sheepNumber;
     private Representation wolfShape;
+    private Colour wolfColour;
+    private Integer wolfNumber;
 
-    public SheepRandomSimulationConfig(Representation sheepShape, Representation wolfShape) {
+    public SheepRandomSimulationConfig(Representation sheepShape, Colour sheepColour, Integer sheepNumber,
+                                       Representation wolfShape, Colour wolfColour, Integer wolfNumber) {
         this.sheepShape = sheepShape;
+        this.sheepColour = sheepColour;
+        this.sheepNumber = sheepNumber;
         this.wolfShape = wolfShape;
+        this.wolfColour = wolfColour;
+        this.wolfNumber = wolfNumber;
     }
 
     @Override
     public GenericAgentListBuilder getAgentsBuilder() {
         GenericAgentListBuilder sheepBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(10)
-                .setRepresentation(ModRepresentation.apply(sheepShape, Colour.GREEN))
+                .setNumber(sheepNumber)
+                .setRepresentation(ModRepresentation.apply(sheepShape, sheepColour))
                 .setAgentBuilder(SheepSpecies::newAgent);
         GenericAgentListBuilder wolfBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(3)
-                .setRepresentation(ModRepresentation.apply(wolfShape, Colour.RED))
+                .setNumber(wolfNumber)
+                .setRepresentation(ModRepresentation.apply(wolfShape, wolfColour))
                 .setAgentBuilder(WolfSpecies::newAgent);
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(sheepBuilder)
