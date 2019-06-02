@@ -12,9 +12,12 @@ object ActRunAwayFromPredator extends Action {
   override def action(modifiers: ModifierBuffer): StepOutput = {
     val predatorCandidates = modifiers.getAll[ModFearOf].map(m => m.predator)
     val position = modifiers.getFirst[ModPosition].position
+    val maxDistance = modifiers.getFirst[ModRunAwayFromPredatorParameters].maxDistance
     val predatorFactor = modifiers.getFirst[ModRunAwayFromPredatorParameters].predatorFactor
     val predators = modifiers.getAll[ModNeighbour]
-      .filter(m => predatorCandidates.exists(p => p.species.getClass.isAssignableFrom(m.species.species.getClass)))
+      .filter(m => predatorCandidates.exists(p =>
+        p.species.getClass.isAssignableFrom(m.species.species.getClass)
+          && m.position.distance(position) < maxDistance))
 
     val predatorVelocity = if (predators.nonEmpty) {
       val perceivedCentreOfMass = predators.foldLeft(model.Vector())(_ + _.position) / predators.size

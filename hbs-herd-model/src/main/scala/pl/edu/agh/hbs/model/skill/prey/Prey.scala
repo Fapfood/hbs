@@ -19,7 +19,7 @@ trait Prey extends Agent {
 
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
-    modifiers += ModRunAwayFromPredatorParameters(0.2)
+    modifiers += ModRunAwayFromPredatorParameters(1.0 / 5, 200)
     super.defaultModifiers() ++ modifiers
   }
 }
