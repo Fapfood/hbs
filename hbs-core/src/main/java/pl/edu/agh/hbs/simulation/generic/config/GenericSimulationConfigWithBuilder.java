@@ -10,6 +10,7 @@ import pl.edu.agh.hbs.simulation.generic.builders.GenericAreaListBuilder;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class GenericSimulationConfigWithBuilder implements GenericSimulationConfig {
     public abstract GenericAgentListBuilder getAgentsBuilder();
@@ -18,30 +19,39 @@ public abstract class GenericSimulationConfigWithBuilder implements GenericSimul
 
     public abstract GenericAreaListBuilder getAreasBuilder();
 
-    @Override
-    public List<Agent> getAgents(EnvironmentConfig environmentConfig) {
+    private List<Agent> getAgents(SpaceConfig spaceConfig, List<Area> areas) {
         GenericAgentListBuilder builder = getAgentsBuilder();
         if (builder == null) {
             return Collections.emptyList();
         }
-        return builder.build(environmentConfig);
+        return builder.build(spaceConfig, areas);
     }
 
-    @Override
-    public Collection<Agent> getPatches(EnvironmentConfig environmentConfig) {
+    private Collection<Agent> getPatches(SpaceConfig spaceConfig, List<Area> areas) {
         GenericAgentListBuilder builder = getPatchBuilder();
         if (builder == null) {
             return Collections.emptyList();
         }
-        return builder.build(environmentConfig);
+        return builder.build(spaceConfig, areas);
     }
 
     @Override
-    public List<Area> getAreas(Step step, EnvironmentConfig environmentConfig) {
+    public List<Area> getAreas(Step step, SpaceConfig spaceConfig) {
         GenericAreaListBuilder builder = getAreasBuilder();
         if (builder == null) {
             return Collections.emptyList();
         }
-        return builder.build(step, environmentConfig);
+        List<Area> areas = builder.build(step, spaceConfig);
+        Collection<Agent> agents = getAgents(spaceConfig, areas);
+        Collection<Agent> patches = getPatches(spaceConfig, areas);
+        areas.forEach(area -> area.addAgents(patches.stream()
+                .filter(patch -> area.isInside(patch.position()))
+                .collect(Collectors.toList())
+        ));
+        areas.forEach(area -> area.addAgents(agents.stream()
+                .filter(agent -> area.isInside(agent.position()))
+                .collect(Collectors.toList())
+        ));
+        return areas;
     }
 }

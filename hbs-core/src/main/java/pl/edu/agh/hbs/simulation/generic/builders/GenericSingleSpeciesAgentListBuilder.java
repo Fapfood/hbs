@@ -9,6 +9,8 @@ import pl.edu.agh.hbs.model.skill.basic.modifier.ModEnvironmentConfig;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModPosition;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
 import pl.edu.agh.hbs.model.skill.common.modifier.ModVelocity;
+import pl.edu.agh.hbs.simulation.api.Area;
+import pl.edu.agh.hbs.simulation.generic.config.SpaceConfig;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
@@ -31,18 +33,21 @@ public class GenericSingleSpeciesAgentListBuilder implements GenericAgentListBui
     private Integer number = 1;
 
     @Override
-    public List<Agent> build(EnvironmentConfig environmentConfig) {
+    public List<Agent> build(SpaceConfig spaceConfig, List<Area> areas) {
         List<Integer> arr = Arrays.asList(new Integer[number]);
-        return arr.stream().map(i -> getInstance(environmentConfig)).collect(Collectors.toList());
+        return arr.stream().map(i -> getInstance(spaceConfig, areas)).collect(Collectors.toList());
     }
 
-    private Agent getInstance(EnvironmentConfig environmentConfig) {
+    private Agent getInstance(SpaceConfig spaceConfig, List<Area> areas) {
         Vector min = positionMin == null ? Vector.of(0, 0) : positionMin;
-        Vector max = positionMax == null ? Vector.of(environmentConfig.width(), environmentConfig.height()) : positionMax;
+        Vector max = positionMax == null ? Vector.of(spaceConfig.getWidth(), spaceConfig.getHeight()) : positionMax;
+        Vector position = vectorFromRange(min, max);
+        Area area = areas.stream().filter(area1 -> area1.isInside(position)).collect(Collectors.toList()).get(0);
         return agentBuilder.apply(
                 JavaConverters.asScalaIteratorConverter(Arrays.asList(
-                        ModPosition.apply(vectorFromRange(min, max)),
+                        ModPosition.apply(position),
                         ModVelocity.apply(vectorFromRange(speedMin, speedMax), velocityLabel),
+                        ModEnvironmentConfig.apply(area.getConfig()),
                         (Modifier) representation
                 ).iterator()).asScala().toSeq(),
                 new ModifierBuffer()

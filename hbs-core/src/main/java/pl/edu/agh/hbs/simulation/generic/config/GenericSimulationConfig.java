@@ -9,9 +9,5 @@ import java.util.Collection;
 import java.util.List;
 
 public interface GenericSimulationConfig {
-    Collection<Agent> getAgents(EnvironmentConfig environmentConfig);
-
-    Collection<Agent> getPatches(EnvironmentConfig environmentConfig);
-
-    List<Area> getAreas(Step step, EnvironmentConfig environmentConfig);
+    List<Area> getAreas(Step step, SpaceConfig spaceConfig);
 }

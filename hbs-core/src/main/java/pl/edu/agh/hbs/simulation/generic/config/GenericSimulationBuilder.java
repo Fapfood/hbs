@@ -14,27 +14,16 @@ public class GenericSimulationBuilder {
 
     private GenericAreaStep step;
     private GenericSimulationConfig config;
-    private EnvironmentConfig environmentConfig;
+    private SpaceConfig spaceConfig;
 
-    public GenericSimulationBuilder(GenericAreaStep step, GenericSimulationConfig config, EnvironmentConfig environmentConfig) {
+    public GenericSimulationBuilder(GenericAreaStep step, GenericSimulationConfig config, SpaceConfig spaceConfig) {
         this.step = step;
         this.config = config;
-        this.environmentConfig = environmentConfig;
+        this.spaceConfig = spaceConfig;
     }
 
     public List<Area> build() {
-        List<Area> areas = config.getAreas(step, environmentConfig);
-        Collection<Agent> agents = config.getAgents(environmentConfig);
-        Collection<Agent> patches = config.getPatches(environmentConfig);
-        areas.forEach(area -> area.addAgents(patches.stream()
-                .filter(patch -> area.isInside(patch.position()))
-                .collect(Collectors.toList())
-        ));
-        areas.forEach(area -> area.addAgents(agents.stream()
-                .filter(agent -> area.isInside(agent.position()))
-                .collect(Collectors.toList())
-        ));
-        return areas;
+        return config.getAreas(step, spaceConfig);
     }
 
     public GenericAreaStep getStep() {

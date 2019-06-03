@@ -6,6 +6,7 @@ import pl.edu.agh.hbs.simulation.api.Area;
 import pl.edu.agh.hbs.simulation.api.Step;
 import pl.edu.agh.hbs.simulation.cartesian.CartesianRectangularBordersDefinition;
 import pl.edu.agh.hbs.simulation.generic.GenericArea;
+import pl.edu.agh.hbs.simulation.generic.config.SpaceConfig;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,10 +18,10 @@ public class RandomAreaListBuilder implements GenericAreaListBuilder {
     private Long numberOfAreas;
 
     @Override
-    public List<Area> build(Step step, EnvironmentConfig environmentConfig) {
+    public List<Area> build(Step step, SpaceConfig spaceConfig) {
         List<Area> areas = new LinkedList<>();
         Vector min = positionMin == null ? Vector.of(0, 0) : positionMin;
-        Vector max = positionMax == null ? Vector.of(environmentConfig.width(), environmentConfig.height()) : positionMax;
+        Vector max = positionMax == null ? Vector.of(spaceConfig.getWidth(), spaceConfig.getHeight()) : positionMax;
         long areasInRow = Math.round(Math.floor(Math.sqrt(numberOfAreas)));
         long areasInColumn = numberOfAreas / areasInRow;
         Vector areaMax = Vector.of(max.get(0) - min.get(0), max.get(1) - min.get(1));
@@ -36,7 +37,7 @@ public class RandomAreaListBuilder implements GenericAreaListBuilder {
                         leftBottom.get(1) + areaSize.get(1)
                 );
                 Area area = new GenericArea(
-                        "area-" + ((i * areasInColumn) + j),
+                        "area" + ((i * areasInColumn) + j),
                         step,
                         new CartesianRectangularBordersDefinition(
                                 leftBottom,
@@ -47,9 +48,8 @@ public class RandomAreaListBuilder implements GenericAreaListBuilder {
                                 i == 0
                         ),
                         new LinkedList<>(),
-                        environmentConfig
+                        new EnvironmentConfig(spaceConfig.getWidth(), spaceConfig.getHeight(), spaceConfig.getPatchWidth(), spaceConfig.getPatchHeight())
                 );
-                System.out.println("area-" + ((i * areasInColumn) + j) + ',' + leftBottom.get(0) + ',' + leftBottom.get(1) + ',' + rightUpper.get(0) + ',' + rightUpper.get(1) + ',' + i + ',' + j);
                 areas.add(area);
             }
         }
