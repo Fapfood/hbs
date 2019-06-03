@@ -90,6 +90,10 @@ public abstract class Area implements Serializable {
         return areaBordersDefinition.getUpperRightPosition();
     }
 
+    public EnvironmentConfig getConfig() {
+        return config;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

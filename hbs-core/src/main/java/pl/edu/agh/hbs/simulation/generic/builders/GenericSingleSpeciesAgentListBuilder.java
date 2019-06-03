@@ -1,12 +1,16 @@
-package pl.edu.agh.hbs.simulation.generic;
+package pl.edu.agh.hbs.simulation.generic.builders;
 
 import pl.edu.agh.hbs.model.Agent;
+import pl.edu.agh.hbs.model.EnvironmentConfig;
 import pl.edu.agh.hbs.model.ModifierBuffer;
 import pl.edu.agh.hbs.model.Vector;
 import pl.edu.agh.hbs.model.skill.Modifier;
+import pl.edu.agh.hbs.model.skill.basic.modifier.ModEnvironmentConfig;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModPosition;
 import pl.edu.agh.hbs.model.skill.basic.modifier.ModRepresentation;
 import pl.edu.agh.hbs.model.skill.common.modifier.ModVelocity;
+import pl.edu.agh.hbs.simulation.api.Area;
+import pl.edu.agh.hbs.simulation.generic.config.SpaceConfig;
 import scala.collection.JavaConverters;
 import scala.collection.Seq;
 
@@ -20,8 +24,8 @@ import java.util.stream.Collectors;
 public class GenericSingleSpeciesAgentListBuilder implements GenericAgentListBuilder {
 
     private BiFunction<Seq<Modifier>, ModifierBuffer, Agent> agentBuilder;
-    private Vector positionMin = Vector.of(0, 0);
-    private Vector positionMax = Vector.of(2000, 1500);
+    private Vector positionMin = null;
+    private Vector positionMax = null;
     private Vector speedMin = Vector.of(-20, -20);
     private Vector speedMax = Vector.of(20, 20);
     private String velocityLabel = "standard";
@@ -29,16 +33,21 @@ public class GenericSingleSpeciesAgentListBuilder implements GenericAgentListBui
     private Integer number = 1;
 
     @Override
-    public Collection<Agent> build() {
+    public List<Agent> build(SpaceConfig spaceConfig, List<Area> areas) {
         List<Integer> arr = Arrays.asList(new Integer[number]);
-        return arr.stream().map(i -> getInstance()).collect(Collectors.toList());
+        return arr.stream().map(i -> getInstance(spaceConfig, areas)).collect(Collectors.toList());
     }
 
-    private Agent getInstance() {
+    private Agent getInstance(SpaceConfig spaceConfig, List<Area> areas) {
+        Vector min = positionMin == null ? Vector.of(0, 0) : positionMin;
+        Vector max = positionMax == null ? Vector.of(spaceConfig.getWidth(), spaceConfig.getHeight()) : positionMax;
+        Vector position = vectorFromRange(min, max);
+        Area area = areas.stream().filter(area1 -> area1.isInside(position)).collect(Collectors.toList()).get(0);
         return agentBuilder.apply(
                 JavaConverters.asScalaIteratorConverter(Arrays.asList(
-                        ModPosition.apply(vectorFromRange(positionMin, positionMax)),
+                        ModPosition.apply(position),
                         ModVelocity.apply(vectorFromRange(speedMin, speedMax), velocityLabel),
+                        ModEnvironmentConfig.apply(area.getConfig()),
                         (Modifier) representation
                 ).iterator()).asScala().toSeq(),
                 new ModifierBuffer()

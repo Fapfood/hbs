@@ -2,6 +2,7 @@ package pl.edu.agh.hbs.simulation.generic;
 
 import pl.edu.agh.hbs.simulation.api.Area;
 import pl.edu.agh.hbs.simulation.api.SimulationMap;
+import pl.edu.agh.hbs.simulation.generic.config.GenericSimulationBuilder;
 
 import java.util.List;
 

@@ -26,14 +26,19 @@
         <constructor-arg name="factor" value="5"/>
     </bean>
 
+    <bean id="grass" name="grass" class="pl.edu.agh.hbs.simulation.shape.BoxShape">
+        <constructor-arg name="factor" value="2"/>
+    </bean>
+
     <bean id="webClientConfigProvider" class="pl.edu.agh.hbs.simulation.WebClientConfigProviderImpl">
         <constructor-arg name="width" value="2000"/>
         <constructor-arg name="height" value="1500"/>
-        <constructor-arg name="colour" value="GREEN"/>
+        <constructor-arg name="colour" value="BLACK"/>
         <constructor-arg name="representations">
             <scala-util:seq>
                 <ref bean="sheep"/>
                 <ref bean="wolf"/>
+                <ref bean="grass"/>
             </scala-util:seq>
         </constructor-arg>
     </bean>
@@ -46,18 +51,19 @@
                     <bean class="pl.edu.agh.hbs.simulation.generic.config.SpaceConfig">
                         <constructor-arg name="width" value="2000"/>
                         <constructor-arg name="height" value="1500"/>
-                        <constructor-arg name="patchHeight" value="100"/>
-                        <constructor-arg name="patchWidth" value="100"/>
+                        <constructor-arg name="patchHeight" value="20"/>
+                        <constructor-arg name="patchWidth" value="20"/>
                     </bean>
                 </constructor-arg>
                 <constructor-arg name="config">
-                    <bean class="pl.edu.agh.hbs.simulation.config.SheepRandomSimulationConfig">
+                    <bean class="pl.edu.agh.hbs.simulation.config.HerbivorousSheepRandomSimulationConfig">
                         <constructor-arg name="sheepShape" ref="sheep"/>
                         <constructor-arg name="sheepColour" value="WHITE"/>
                         <constructor-arg name="sheepNumber" value="10"/>
                         <constructor-arg name="wolfShape" ref="wolf"/>
                         <constructor-arg name="wolfColour" value="BLACK"/>
                         <constructor-arg name="wolfNumber" value="2"/>
+                        <constructor-arg name="grassShape" ref="grass"/>
                     </bean>
                 </constructor-arg>
             </bean>

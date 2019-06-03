@@ -1,7 +1,10 @@
-package pl.edu.agh.hbs.simulation.generic;
+package pl.edu.agh.hbs.simulation.generic.config;
 
 import pl.edu.agh.hbs.model.Agent;
+import pl.edu.agh.hbs.model.EnvironmentConfig;
 import pl.edu.agh.hbs.simulation.api.Area;
+import pl.edu.agh.hbs.simulation.generic.GenericAreaStep;
+import pl.edu.agh.hbs.simulation.generic.config.GenericSimulationConfig;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,20 +14,16 @@ public class GenericSimulationBuilder {
 
     private GenericAreaStep step;
     private GenericSimulationConfig config;
+    private SpaceConfig spaceConfig;
 
-    public GenericSimulationBuilder(GenericAreaStep step, GenericSimulationConfig config) {
+    public GenericSimulationBuilder(GenericAreaStep step, GenericSimulationConfig config, SpaceConfig spaceConfig) {
         this.step = step;
         this.config = config;
+        this.spaceConfig = spaceConfig;
     }
 
-    List<? extends Area> build() {
-        List<? extends Area> areas = config.getAreas(step);
-        Collection<Agent> agents = config.getAgents();
-        areas.forEach(area -> area.addAgents(agents.stream()
-                .filter(agent -> area.isInside(agent.position()))
-                .collect(Collectors.toList())
-        ));
-        return areas;
+    public List<Area> build() {
+        return config.getAreas(step, spaceConfig);
     }
 
     public GenericAreaStep getStep() {
