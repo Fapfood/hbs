@@ -30,7 +30,7 @@ class SheepAgent(private val initModifiers: Seq[Modifier], inheritedModifiers: M
     modifiers += ModSpecies(SheepSpecies)
     modifiers += ModIdentifier(SheepSpecies.nextId())
     modifiers += ModEnergy(0, "consumed")
-    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "wind")
+    modifiers += ModVelocity(model.Vector((new Random().nextDouble() - 0.5) * 20, (new Random().nextDouble() - 0.5) * 20), "random")
     super.defaultModifiers() ++ modifiers
   }
 }

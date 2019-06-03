@@ -17,26 +17,35 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SheepRandomSimulationConfig extends GenericSimulationConfigWithBuilder {
-
     private Representation sheepShape;
+    private Colour sheepColour;
+    private Integer sheepNumber;
     private Representation wolfShape;
+    private Colour wolfColour;
+    private Integer wolfNumber;
     private Representation grassShape;
 
+    public SheepRandomSimulationConfig(Representation sheepShape, Colour sheepColour, Integer sheepNumber,
+                                       Representation wolfShape, Colour wolfColour, Integer wolfNumber) {
     public SheepRandomSimulationConfig(Representation sheepShape, Representation wolfShape, Representation grassShape) {
         this.sheepShape = sheepShape;
+        this.sheepColour = sheepColour;
+        this.sheepNumber = sheepNumber;
         this.wolfShape = wolfShape;
         this.grassShape = grassShape;
+        this.wolfColour = wolfColour;
+        this.wolfNumber = wolfNumber;
     }
 
     @Override
     public GenericAgentListBuilder getAgentsBuilder() {
         GenericAgentListBuilder sheepBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(0)
-                .setRepresentation(ModRepresentation.apply(sheepShape, Colour.WHITE))
+                .setNumber(sheepNumber)
+                .setRepresentation(ModRepresentation.apply(sheepShape, sheepColour))
                 .setAgentBuilder(SheepSpecies::newAgent);
         GenericAgentListBuilder wolfBuilder = new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(0)
-                .setRepresentation(ModRepresentation.apply(wolfShape, Colour.BLACK))
+                .setNumber(wolfNumber)
+                .setRepresentation(ModRepresentation.apply(wolfShape, wolfColour))
                 .setAgentBuilder(WolfSpecies::newAgent);
         return new GenericCombinedAgentListBuilder()
                 .addAgentsBuilder(sheepBuilder)

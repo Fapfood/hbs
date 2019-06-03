@@ -12,10 +12,13 @@ object ActFollowPrey extends Action {
   override def action(modifiers: ModifierBuffer): StepOutput = {
     val preyCandidates = modifiers.getAll[ModHuntFor].map(m => m.prey)
     val position = modifiers.getFirst[ModPosition].position
+    val maxDistance = modifiers.getFirst[ModFollowPreyParameters].maxDistance
     val followFactor = modifiers.getFirst[ModFollowPreyParameters].followFactor
 
     val preys = modifiers.getAll[ModNeighbour]
-      .filter(m => preyCandidates.exists(p => p.species.getClass.isAssignableFrom(m.species.species.getClass)))
+      .filter(m => preyCandidates.exists(p =>
+        p.species.getClass.isAssignableFrom(m.species.species.getClass)
+          && m.position.distance(position) < maxDistance))
 
     val followVelocity = if (preys.nonEmpty) {
       val closestPreyPosition = preys

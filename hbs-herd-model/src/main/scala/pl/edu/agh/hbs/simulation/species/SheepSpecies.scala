@@ -9,5 +9,7 @@ class SheepSpecies extends Species
 object SheepSpecies extends SpeciesObject {
   override val species = new SheepSpecies
 
+  override val maxNumberOfSpecies: Int = 100
+
   override def newAgent(initModifiers: Seq[Modifier], inheritedModifiers: ModifierBuffer): Agent = new SheepAgent(initModifiers, inheritedModifiers)
 }

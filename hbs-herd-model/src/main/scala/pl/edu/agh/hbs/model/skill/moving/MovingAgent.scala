@@ -2,6 +2,7 @@ package pl.edu.agh.hbs.model.skill.moving
 
 import pl.edu.agh.hbs.model.skill.Modifier
 import pl.edu.agh.hbs.model.skill.moving.decision.DecMove
+import pl.edu.agh.hbs.model.skill.moving.instantAction.ActRandomVelocity
 import pl.edu.agh.hbs.model.skill.moving.modifier.ModMoveParameters
 import pl.edu.agh.hbs.model.{Agent, ModifierBuffer}
 
@@ -9,6 +10,7 @@ import scala.collection.mutable.ListBuffer
 
 trait MovingAgent extends Agent {
   this.decisions += DecMove
+  this.beforeStepActions += ActRandomVelocity
 
   override def modifiersCopiedFromParent(inherited: ModifierBuffer): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
@@ -18,7 +20,7 @@ trait MovingAgent extends Agent {
 
   override def defaultModifiers(): Seq[Modifier] = {
     val modifiers = ListBuffer.empty[Modifier]
-    modifiers += ModMoveParameters(0.1, 500, 50)
+    modifiers += ModMoveParameters(0.1, 400, 10, 50)
     super.defaultModifiers() ++ modifiers
   }
 }

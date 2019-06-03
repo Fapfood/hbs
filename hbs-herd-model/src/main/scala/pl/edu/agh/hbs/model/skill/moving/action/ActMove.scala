@@ -23,11 +23,11 @@ object ActMove extends Action {
     val agentId = modifiers.getFirst[ModIdentifier].id
     val velocityFactor = modifiers.getFirst[ModMoveParameters].velocityFactor
     val propagationRadius = modifiers.getFirst[ModMoveParameters].propagationRadius
+    val config = modifiers.getFirst[ModEnvironmentConfig].config
 
     var position = oldPosition + (velocity * velocityFactor)
 
-    //bounding position todo
-    position = model.Vector((position(0) + 2000 * 5) % 2000, (position(1) + 1500 * 5) % 1500)
+    position = model.Vector((position(0) + config.width * 5) % config.width, (position(1) + config.height * 5) % config.height)
     modifiers.update(ModPosition(position))
 
     new StepOutput(

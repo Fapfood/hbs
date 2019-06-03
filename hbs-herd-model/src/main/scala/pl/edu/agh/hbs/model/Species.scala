@@ -8,13 +8,22 @@ trait SpeciesObject extends Serializable {
 
   val species: Species
 
+  val maxNumberOfSpecies: Int = Int.MaxValue
+
   def newAgent(initModifiers: Seq[Modifier], inheritedModifiers: ModifierBuffer): Agent
 
-  private var counter = 0
+  private var allInClassCounter = 0
+
+  private var currentInClassCounter = 0
 
   final def nextId(): String = {
-    counter += 1
-    this.species.getClass.toString + (counter - 1)
+    currentInClassCounter += 1
+    allInClassCounter += 1
+    this.species.getClass.toString + (allInClassCounter - 1)
   }
+
+  def isMaxReached: Boolean = currentInClassCounter >= maxNumberOfSpecies
+
+  def decCounter(): Unit = currentInClassCounter -= 1
 
 }

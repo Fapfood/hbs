@@ -58,7 +58,11 @@
                 <constructor-arg name="config">
                     <bean class="pl.edu.agh.hbs.simulation.config.SheepRandomSimulationConfig">
                         <constructor-arg name="sheepShape" ref="sheep"/>
+                        <constructor-arg name="sheepColour" value="WHITE"/>
+                        <constructor-arg name="sheepNumber" value="10"/>
                         <constructor-arg name="wolfShape" ref="wolf"/>
+                        <constructor-arg name="wolfColour" value="BLACK"/>
+                        <constructor-arg name="wolfNumber" value="2"/>
                         <constructor-arg name="grassShape" ref="grass"/>
                     </bean>
                 </constructor-arg>

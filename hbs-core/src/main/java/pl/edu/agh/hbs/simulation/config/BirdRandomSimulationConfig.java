@@ -11,18 +11,21 @@ import pl.edu.agh.hbs.ui.Representation;
 import pl.edu.agh.hbs.ui.dto.Colour;
 
 public class BirdRandomSimulationConfig extends GenericSimulationConfigWithBuilder {
-
     private Representation birdShape;
+    private Colour birdColour;
+    private Integer birdNumber;
 
-    public BirdRandomSimulationConfig(Representation birdShape) {
+    public BirdRandomSimulationConfig(Representation birdShape, Colour birdColour, Integer birdNumber) {
         this.birdShape = birdShape;
+        this.birdColour = birdColour;
+        this.birdNumber = birdNumber;
     }
 
     @Override
     public GenericAgentListBuilder getAgentsBuilder() {
         return new GenericSingleSpeciesAgentListBuilder()
-                .setNumber(17)
-                .setRepresentation(ModRepresentation.apply(birdShape, Colour.ORANGE))
+                .setNumber(birdNumber)
+                .setRepresentation(ModRepresentation.apply(birdShape, birdColour))
                 .setAgentBuilder(BirdSpecies::newAgent);
     }
 
